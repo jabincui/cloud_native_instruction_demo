@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: server
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8091/eureka
+  instance:
+    prefer-ip-address: true # 优先使用ip调用这个服务
+
+---

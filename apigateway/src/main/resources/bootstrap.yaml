@@ -1,0 +1,10 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        service: api-gateway

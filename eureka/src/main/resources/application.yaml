@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: cloud-1
+eureka:
+  instance:
+    hostname: localhost
+---
+server:
+  port: 8071
+spring:
+  config:
+    activate:
+      on-profile: native
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+---
+server:
+  port: 8091
+spring:
+  config:
+    activate:
+      on-profile: cloud-1
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8092/eureka
+---
+server:
+  port: 8092
+spring:
+  config:
+    activate:
+      on-profile: cloud-2
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8091/eureka

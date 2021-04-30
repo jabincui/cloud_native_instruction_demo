@@ -1,0 +1,44 @@
+server:
+  port: 8101
+spring:
+  application:
+    name: user
+  cloud:
+    sentinel:
+      transport:
+        port: 9101  # 微服务和Sentinel通信的端口，指定任意一个未使用的端口即可
+        dashboard: localhost:8880
+        datasource:
+          ds1:
+            nacos:
+              server-addr: 127.0.0.1:8848
+              dataId: sentinel-user
+              groupId: DEFAULT_GROUP
+              data-type: json
+              rule-type: flow
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        service: user
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+feign:
+  sentinel:
+    enabled: true
+
+#  datasource:
+#    url: jdbc:mysql://127.0.0.1:3306/oneapp
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    type: com.alibaba.druid.pool.DruidDataSource
+
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8091/eureka,http://localhost:8092/eureka
+#  instance:
+#    prefer-ip-address: true # 优先使用ip调用这个服务
